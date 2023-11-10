@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar>
+  <v-app-bar class="mb-10">
     <v-row>
       <v-col cols="10">
         <v-form @submit.prevent="searchMovie" class="mt-5">
@@ -7,7 +7,14 @@
         </v-form>
       </v-col>
       <v-col cols="2">
-        <v-btn class="mt-5" type="submit" rounded color="primary" @click="searchMovie">
+        <v-btn
+          class="mt-5"
+          type="submit"
+          rounded
+          color="primary"
+          @click="searchMovie"
+          :disabled="!inputValue"
+        >
           Search
         </v-btn>
       </v-col>
@@ -25,7 +32,6 @@ export default Vue.extend({
   }),
   methods: {
     searchMovie() {
-      console.log(this.inputValue);
       this.$store.dispatch('fetchData', { movieName: this.inputValue });
     },
   },
