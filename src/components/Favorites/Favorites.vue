@@ -1,30 +1,45 @@
 <template>
-  <v-navigation-drawer color="#09151E" permanent app>
-    <v-list-item>
-      <v-list-item-content>
-        <v-list-item-title class="title"> Favorites </v-list-item-title>
-      </v-list-item-content>
-    </v-list-item>
-    <v-divider></v-divider>
-    <v-list dense>
-      <v-list-item v-for="(favorite, index) in favorites" :key="index">
-        <v-list-item-content>
-          <v-list-item-title>
-            {{ favorite }}
-          </v-list-item-title>
-        </v-list-item-content>
-      </v-list-item>
-    </v-list>
-  </v-navigation-drawer>
+  <div class="carousel-container">
+    <h2>Movies bookmarked by you</h2>
+    <div class="wrapper" id="carousel">
+      <v-carousel>
+        <v-carousel-item
+          v-for="(favorite, index) in favoriteMovies"
+          class="flicking-panel"
+          :key="index"
+          :src="favorite.Poster"
+          @click="selectMovie(favorite.imdbID)"
+        ></v-carousel-item>
+      </v-carousel>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
-export default {
+import Vue from 'vue';
+import { mapGetters } from 'vuex';
+
+export default Vue.extend({
   name: 'FavoritesComponent',
-  data: () => ({
-    favorites: ['Shrek 1', 'Shrek 2', 'Shrek 3', 'Shrek 4'],
-  }),
-};
+  components: {},
+  computed: {
+    ...mapGetters({ favoriteMovies: 'getFavoriteMovies' }),
+  },
+  methods: {
+    selectMovie(imdbID: string) {
+      this.$store.commit('setSelectedMovieByImdbId', imdbID);
+    },
+  },
+});
 </script>
 
-<style></style>
+<style scoped>
+.carousel-container {
+  height: 300px;
+  margin: 0 2rem;
+}
+.carousel-image {
+  height: 250px;
+  user-select: none;
+}
+</style>
