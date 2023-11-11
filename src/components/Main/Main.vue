@@ -14,7 +14,7 @@
         </div>
 
         <div v-else-if="selectedMovie">
-          <movie-info :selectedMovie="selectedMovie" />
+          <movie-info :selectedMovie="selectedMovie"></movie-info>
         </div>
       </v-col>
     </v-row>
@@ -41,7 +41,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
   .v-progress-circular {
     opacity: 1;
     position: absolute !important;
