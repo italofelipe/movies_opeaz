@@ -7,7 +7,7 @@ describe('MovieInfoComponent', () => {
     const value = '2022';
 
     const wrapper = mount(MovieInfoComponentCell, {
-      propsData: { attribute, value }
+      propsData: { attribute, value },
     });
 
     expect(wrapper.exists()).toBe(true);

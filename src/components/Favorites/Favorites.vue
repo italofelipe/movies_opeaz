@@ -1,6 +1,6 @@
 <template>
   <div class="carousel-container">
-    <h2>Movies bookmarked by you</h2>
+    <h3>Movies you bookmarked</h3>
     <div class="wrapper" id="carousel">
       <v-carousel>
         <v-carousel-item

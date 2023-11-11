@@ -20,18 +20,18 @@ describe('Favorites.vue', () => {
   beforeEach(() => {
     store = new Vuex.Store({
       getters: {
-        getFavoriteMovies: () => favoriteMovies
+        getFavoriteMovies: () => favoriteMovies,
       },
       mutations: {
-        setSelectedMovieByImdbId: jest.fn()
-      }
+        setSelectedMovieByImdbId: jest.fn(),
+      },
     });
   });
 
   it('renders the component', () => {
     wrapper = mount(Favorites, {
       store,
-      localVue
+      localVue,
     });
     expect(wrapper.exists()).toBe(true);
   });
@@ -39,7 +39,7 @@ describe('Favorites.vue', () => {
   it('The component renders a carousel of favorite movies', () => {
     wrapper = mount(Favorites, {
       store,
-      localVue
+      localVue,
     });
 
     // Assert

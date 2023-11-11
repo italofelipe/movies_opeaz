@@ -1,4 +1,5 @@
-import { mount, createLocalVue, Wrapper } from '@vue/test-utils';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { mount, createLocalVue } from '@vue/test-utils';
 import Vuex from 'vuex';
 import HeaderComponent from '@/components/Header/Header.vue';
 
@@ -6,20 +7,20 @@ const localVue = createLocalVue();
 localVue.use(Vuex);
 
 describe('HeaderComponent', () => {
-  let store: any;
   let wrapper: any;
+  let store: any;
 
   beforeEach(() => {
     store = new Vuex.Store({
       state: {},
       actions: {
-        fetchData: jest.fn()
-      }
+        fetchData: jest.fn(),
+      },
     });
 
     wrapper = mount(HeaderComponent, {
       localVue,
-      store
+      store,
     });
   });
 
