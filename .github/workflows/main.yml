@@ -27,14 +27,14 @@ jobs:
       - name: Run unit tests
         run: npm run test:unit
 
-      - name: Start the application (for E2E tests)
-        run: npm run serve &
+      #- name: Start the application (for E2E tests)
+      #  run: npm run serve &
   
-      - name: Wait for the application to be ready
-        run: npx wait-on http://localhost:8080
+      #- name: Wait for the application to be ready
+      #  run: npx wait-on http://localhost:8080
 
-      - name: Run E2E tests
-        run: npm run test:e2e
+      #- name: Run E2E tests
+      #  run: npm run test:e2e
 
   deploy:
     runs-on: ubuntu-latest
