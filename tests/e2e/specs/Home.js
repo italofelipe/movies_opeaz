@@ -16,7 +16,7 @@ describe('Application Test', () => {
     cy.get('input').type('Star Wars');
     cy.get('button[type="submit"]').click();
     cy.wait(1000);
-    cy.get('button[type="button"]').click();
+    cy.get('button.v-icon').click();
 
     cy.contains('h2', 'Star Wars: Episode IV - A New Hope');
   });
@@ -35,7 +35,7 @@ describe('Application Test', () => {
     cy.get('input').type('Star Wars');
     cy.get('button[type="submit"]').click();
     cy.wait(1000);
-    cy.get('button[type="button"]').click();
+    cy.get('button.v-icon').click();
 
     cy.contains('h3', 'Movies you bookmarked');
 
