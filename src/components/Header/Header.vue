@@ -1,12 +1,12 @@
 <template>
   <v-app-bar class="mb-10">
     <v-row>
-      <v-col cols="10">
+      <v-col cols="9" md="9" lg="9" xl="8">
         <v-form @submit.prevent="searchMovie" class="mt-5">
           <v-text-field label="To start, type a movie name" v-model="inputValue"> </v-text-field>
         </v-form>
       </v-col>
-      <v-col cols="2">
+      <v-col cols="3" md="3" lg="3" xl="4">
         <v-btn
           class="mt-5"
           type="submit"
@@ -33,6 +33,7 @@ export default Vue.extend({
   methods: {
     searchMovie() {
       this.$store.dispatch('fetchData', { movieName: this.inputValue });
+      this.inputValue = '';
     },
   },
 });
