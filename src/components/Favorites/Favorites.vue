@@ -21,7 +21,6 @@ import { mapGetters } from 'vuex';
 
 export default Vue.extend({
   name: 'FavoritesComponent',
-  components: {},
   computed: {
     ...mapGetters({ favoriteMovies: 'getFavoriteMovies' }),
   },
