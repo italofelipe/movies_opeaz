@@ -1,7 +1,8 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
 
+const { NODE_ENV } = process.env;
 const axiosInstance: AxiosInstance = axios.create({
-  baseURL: 'http://www.omdbapi.com/',
+  baseURL: `${NODE_ENV === 'development' ? 'http' : 'https'}://www.omdbapi.com/`,
   timeout: 5000,
   headers: {
     'Content-Type': 'application/json',
