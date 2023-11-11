@@ -3,7 +3,10 @@
     <div v-if="isLoading">
       <v-progress-circular indeterminate color="primary"></v-progress-circular>
     </div>
-    <v-alert v-if="isAlertVisible" dense type="success">Added to bookmarks!</v-alert>
+    <v-alert v-if="alert.isVisible" dense :type="alert.context === 'ADD' ? 'success' : 'warning'">
+      {{ alert.context === 'ADD' ? 'Added to favorites!' : 'Removed from favorites' }}
+    </v-alert>
+
     <v-row align="center" justify="center">
       <v-col cols="10">
         <div v-if="errorFetchingData">
@@ -31,11 +34,18 @@ export default {
     ...mapGetters({
       isLoading: 'getIsLoading',
       selectedMovie: 'getSelectedMovie',
-      isAlertVisible: 'getIsAlertVisible',
+      alert: 'getIsAlertVisible',
       errorFetchingData: 'getErrorFetchingData',
     }),
   },
 };
 </script>
 
-<style></style>
+<style>
+  .v-progress-circular {
+    opacity: 1;
+    position: absolute !important;
+    top: 50%;
+    left: 50%;
+  }
+</style>
