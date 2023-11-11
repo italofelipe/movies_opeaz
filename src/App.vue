@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" :class="isLoading && 'loading'">
     <v-app>
       <v-container fluid class="pl-0 pr-0">
         <v-row>
@@ -12,7 +12,7 @@
           <v-divider class="mt-5"></v-divider>
         </v-row>
         <v-row justify="center">
-          <v-col cols="4">
+          <v-col cols="12" md="8" lg="4" xl="4">
             <Favorites v-if="favoriteMovies.length > 0" />
 
             <h2 v-else>To see your favorite movies, search in the input above</h2>
@@ -37,7 +37,7 @@ export default defineComponent({
     MainSection,
   },
   computed: {
-    ...mapGetters({ favoriteMovies: 'getFavoriteMovies' }),
+    ...mapGetters({ favoriteMovies: 'getFavoriteMovies', isLoading: 'getIsLoading' }),
   },
 });
 </script>
@@ -45,5 +45,8 @@ export default defineComponent({
 <style>
 * {
   font-family: 'Quicksand', sans-serif;
+}
+.loading {
+  opacity: 0.5;
 }
 </style>
