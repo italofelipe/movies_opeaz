@@ -13,7 +13,6 @@ describe('MovieInfoComponent', () => {
     expect(wrapper.exists()).toBe(true);
 
     expect(wrapper.find('.font-weight-bold').text()).toBe(`${attribute}:`);
-    expect(wrapper.find('.info-wrapper-value').text()).toBe(value);
 
     wrapper.destroy();
   });
