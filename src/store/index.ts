@@ -10,13 +10,19 @@ export default new Vuex.Store<{
   favoriteMovies: Movie[];
   isLoading: boolean;
   selectedMovie: Movie | null;
-  isAlertVisible: boolean;
+  alert: {
+    isVisible: boolean;
+    context: 'ADD' | 'REMOVE' | null;
+  };
 }>({
   state: {
     errorFetchingData: false,
     favoriteMovies: [],
     isLoading: false,
-    isAlertVisible: false,
+    alert: {
+      isVisible: false,
+      context: null,
+    },
     selectedMovie: null,
   },
   getters: {
@@ -30,31 +36,67 @@ export default new Vuex.Store<{
       return state.favoriteMovies;
     },
     getIsAlertVisible(state) {
-      return state.isAlertVisible;
+      return state.alert;
     },
     getErrorFetchingData(state) {
       return state.errorFetchingData;
     },
+    verifyIfSelectedMovieIsAlreadyFavorite(state) {
+      const movieExistsOrNot = state.favoriteMovies.find(
+        (movie) => movie.imdbID === state.selectedMovie?.imdbID,
+      );
+      return !!movieExistsOrNot;
+    },
   },
   mutations: {
     setFavoriteMovies(state, payload) {
-      state.favoriteMovies = [...state.favoriteMovies, payload];
-      state.isAlertVisible = true;
+      const existingIndex = state.favoriteMovies.findIndex(
+        (movie) => movie.imdbID === payload.imdbID,
+      );
+
+      if (existingIndex !== -1) {
+        state.favoriteMovies.splice(existingIndex, 1);
+        state.alert = {
+          isVisible: true,
+          context: 'REMOVE',
+        };
+      } else {
+        state.favoriteMovies = [...state.favoriteMovies, payload];
+        state.alert = {
+          isVisible: true,
+          context: 'ADD',
+        };
+      }
     },
     setLoading(state, payload) {
       state.isLoading = payload;
     },
     setSelectedMovie(state, payload) {
-      state.selectedMovie = payload;
+      state.selectedMovie = { ...payload, userPersonalRating: 0 };
     },
     setAlertVisibility(state, isVisible) {
-      state.isAlertVisible = isVisible;
+      state.alert = { context: null, isVisible };
     },
     setSelectedMovieByImdbId(state, imdbId) {
-      state.selectedMovie = state.favoriteMovies.find((movie) => movie.imdbID === imdbId) ?? null;
+      const existingMovie = state.favoriteMovies.find((movie) => movie.imdbID === imdbId);
+      if (!existingMovie) {
+        state.selectedMovie = null;
+      } else {
+        state.selectedMovie = { ...existingMovie };
+      }
     },
     setErrorFetchingData(state, payload) {
       state.errorFetchingData = payload;
+    },
+    setUserRating(state, payload) {
+      state.selectedMovie = { ...state.selectedMovie, userPersonalRating: payload } as Movie;
+
+      const index = state.favoriteMovies.findIndex(
+        (movie) => movie.imdbID === state.selectedMovie?.imdbID,
+      );
+      if (index !== -1) {
+        state.favoriteMovies[index].userPersonalRating = payload;
+      }
     },
   },
   actions: {

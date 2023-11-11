@@ -13,7 +13,7 @@ export interface Movie {
   Runtime: string;
   Title: string;
   Type: string;
-  userPersonalRating: string;
+  userPersonalRating: number;
   Year: string;
   Response?: string; // in case of 404
   Error?: string; // in case of 404
